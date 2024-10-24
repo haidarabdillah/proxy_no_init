@@ -1,26 +1,27 @@
 const RPC_URL = process.env.RPC_URL;
-const contractList = ['0x66cEb38b6085Eb9B081adE9711EFA32232F2191F'];
+const contractList = ["0x55d398326f99059fF775485246999027B3197955"];
 const abiList = [
   '[{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"_decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]',
 ];
 console.log(contractList);
 console.log(abiList);
 
-const { ethers } = require('ethers');
-const EthereumRpc = require('ethereum-rpc-promise');
-let eth = new EthereumRpc(RPC_URL);
+const { ethers } = require("ethers");
+const EthereumRpc = require("ethereum-rpc-promise");
+let eth = new EthereumRpc("https://binance.llamarpc.com");
 const ethereum = new ethers.providers.JsonRpcProvider(RPC_URL);
+const ethereumEthers = new ethers.providers.JsonRpcProvider(RPC_URL);
 
-const Web3 = require('web3');
+const Web3 = require("web3");
 const web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL));
-const InputDataDecoder = require('ethereum-input-data-decoder');
-const log = require('fastify-cli/log');
-const BigNumber = require('bignumber.js');
+const InputDataDecoder = require("ethereum-input-data-decoder");
+const log = require("fastify-cli/log");
+const BigNumber = require("bignumber.js");
 
 function selectRpcUrl(height) {
   // Memastikan height memiliki nilai yang valid
-  if (typeof height !== 'number' || isNaN(height)) {
-    throw new Error('Height harus merupakan sebuah angka.');
+  if (typeof height !== "number" || isNaN(height)) {
+    throw new Error("Height harus merupakan sebuah angka.");
   }
 
   // Mendeteksi RPC_URL berdasarkan height % 5
@@ -47,7 +48,7 @@ function selectRpcUrl(height) {
     case 9:
       return process.env.ENV_RPC_9;
     default:
-      throw new Error('Tidak dapat menemukan RPC_URL yang sesuai.');
+      throw new Error("Tidak dapat menemukan RPC_URL yang sesuai.");
   }
 }
 
@@ -80,29 +81,48 @@ const getGasPrice = async () => {
 
 const getBalance = async (request) => {
   const { address } = request.body;
-  const balance = await eth.eth_getBalance(address, 'latest');
+  const balance = await ethereumEthers.getBalance(address);
+  const balanceEther = ethers.utils.formatEther(balance);
+  return {
+    balance: balanceEther,
+  };
   return {
     balance: web3.utils
-      .fromWei(balance, 'wei')
-      .toLocaleString('fullwide', { useGrouping: false }),
+      .fromWei(balanceEther, "wei")
+      .toLocaleString("fullwide", { useGrouping: false }),
   };
 };
 
 const getTokenBalance = async (request) => {
   const { address, contractAddress } = request.body;
-  var sha3 = web3.utils.sha3('balanceOf(address)');
-  const data = sha3.substr(0, 10) + web3.utils.padLeft(address.substr(2), 64);
-  var balance = await eth.eth_call(
-    {
-      to: contractAddress,
-      data: data,
-    },
-    'latest'
+
+  const abi = [
+    "function balanceOf(address owner) view returns (uint256)",
+    "function decimals() view returns (uint8)",
+  ];
+  const tokenContract = new ethers.Contract(
+    contractAddress,
+    abi,
+    ethereumEthers
   );
+  const balance = await tokenContract.balanceOf(address);
+
+  const decimals = await tokenContract.decimals();
+  const balanceFormatted = ethers.utils.formatUnits(balance, decimals);
+
+  // const data = sha3.substr(0, 10) + web3.utils.padLeft(address.substr(2), 64);
+  // var balance = await eth.eth_call(
+  //   {
+  //     to: contractAddress,
+  //     data: data,
+  //   },
+  //   "latest"
+  // );
+  return { balance: balanceFormatted };
   return {
     balance: web3.utils
       .hexToNumberString(balance)
-      .toLocaleString('fullwide', { useGrouping: false }),
+      .toLocaleString("fullwide", { useGrouping: false }),
   };
 };
 
@@ -156,7 +176,7 @@ const sendToken = async (request) => {
     to: contractAddress.toLowerCase(),
     gasLimit: web3.utils.toHex(gasLimit),
     gasPrice: web3.utils.toHex(gasPrice),
-    value: '0x00',
+    value: "0x00",
     data: contractRawTx,
   };
   const account = web3.eth.accounts.privateKeyToAccount(privKey);
@@ -173,7 +193,7 @@ const fetchBlock = async (request) => {
   console.log(`Fetching block from ${height}`);
   var txs = [];
 
-  const contract = ['transfer', 'transferFrom', 'mint', 'sendMultiSig'];
+  const contract = ["transfer", "transferFrom", "mint", "sendMultiSig"];
   const block = await gethConnect.getBlockWithTransactions(height);
   const transactions = block ? block.transactions : [];
   // const simpleTxs = transactions.map((tx) => {
@@ -199,20 +219,20 @@ const fetchBlock = async (request) => {
       const from = tx.from;
       const gasPrice = tx.gasPrice;
       const gasLimit = tx.gasLimit;
-      const to = tx.to || '';
+      const to = tx.to || "";
       const value = tx.value;
       const data = tx.data;
 
-      if (data === '0x' || parseInt(data, 16) === 0) {
+      if (data === "0x" || parseInt(data, 16) === 0) {
         dt = {
           txid: txid,
           from: from,
-          gasPrice: gasPrice.toLocaleString('fullwide', { useGrouping: false }),
-          gasLimit: gasLimit.toLocaleString('fullwide', { useGrouping: false }),
+          gasPrice: gasPrice.toLocaleString("fullwide", { useGrouping: false }),
+          gasLimit: gasLimit.toLocaleString("fullwide", { useGrouping: false }),
           to: to,
-          amount: value.toLocaleString('fullwide', { useGrouping: false }),
-          contractAddress: '',
-          type: 'Ether',
+          amount: value.toLocaleString("fullwide", { useGrouping: false }),
+          contractAddress: "",
+          type: "Ether",
         };
       } else {
         const lowerContract = contractList.map((value) => value.toLowerCase());
@@ -224,25 +244,25 @@ const fetchBlock = async (request) => {
           var abi = abiList[0];
           const decoder = new InputDataDecoder(abi);
           let result = decoder.decodeData(data);
-          let toaddress = '0x' + result.inputs[0];
+          let toaddress = "0x" + result.inputs[0];
           const valid = isValidAddress(toaddress);
-          if (valid && typeof result.inputs[1] !== 'string') {
+          if (valid && typeof result.inputs[1] !== "string") {
             if (contract.includes(result.method)) {
               dt = {
                 txid: txid,
                 from: from,
-                gasPrice: gasPrice.toLocaleString('fullwide', {
+                gasPrice: gasPrice.toLocaleString("fullwide", {
                   useGrouping: false,
                 }),
-                gasLimit: gasLimit.toLocaleString('fullwide', {
+                gasLimit: gasLimit.toLocaleString("fullwide", {
                   useGrouping: false,
                 }),
                 to: toaddress,
-                amount: result.inputs[1].toLocaleString('fullwide', {
+                amount: result.inputs[1].toLocaleString("fullwide", {
                   useGrouping: false,
                 }),
                 contractAddress: to,
-                type: 'Smart Contract',
+                type: "Smart Contract",
               };
             }
           }

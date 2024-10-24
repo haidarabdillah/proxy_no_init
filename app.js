@@ -6,10 +6,10 @@ const { initTokenABI } = require('./services/init');
 
 // Pass --options via CLI arguments in command to enable these options.
 module.exports.options = {};
-async function initABI() {
-  console.log('running init');
-  await initTokenABI();
-}
+// async function initABI() {
+//   console.log('running init');
+//   await initTokenABI();
+// }
 
 module.exports = async function (fastify, opts) {
   // Place here your custom code!
